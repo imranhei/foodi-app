@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
 import logo from "/logo.png";
 import { LuPhoneCall } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isSticky, setSticky] = useState(false);
   const navItems = (
     <>
       <li>
-        <a href="/">Home</a>
+        <Link to={"/"}>Home</Link>
       </li>
       <li>
         <details>
           <summary>Menu</summary>
           <ul className="p-2">
             <li>
-              <a>All</a>
+              <Link to={"/menu"}>All</Link>
             </li>
             <li>
-              <a>Salad</a>
+              <Link to={"/salad"}>Salad</Link>
             </li>
             <li>
-              <a>Pizza</a>
+              <Link to={"/pizza"}>Pizza</Link>
             </li>
           </ul>
         </details>
@@ -30,19 +31,19 @@ export default function Navbar() {
           <summary>Services</summary>
           <ul className="p-2">
             <li>
-              <a>Online Order</a>
+              <Link to={"online_order"}>Online Order</Link>
             </li>
             <li>
-              <a>Table Booking</a>
+              <Link to={"table_booking"}>Table Booking</Link>
             </li>
             <li>
-              <a>Order Tracking</a>
+              <Link to={"order_tracking"}>Order Tracking</Link>
             </li>
           </ul>
         </details>
       </li>
       <li>
-        <a>Offers</a>
+        <Link to={"offer"}>Offers</Link>
       </li>
     </>
   );
@@ -91,9 +92,9 @@ export default function Navbar() {
               {navItems}
             </ul>
           </div>
-          <a href="/">
+          <Link to="/">
             <img src={logo} alt="" />
-          </a>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
@@ -101,18 +102,18 @@ export default function Navbar() {
         <div className="navbar-end">
 
             {/* Search Button */}
-          <button class="btn btn-ghost btn-circle hidden lg:flex">
+          <button className="btn btn-ghost btn-circle hidden lg:flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
+              className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
@@ -144,9 +145,9 @@ export default function Navbar() {
           </div>
 
           {/* Contact button */}
-          <a className="btn bg-green rounded-full px-6 text-white flex items-center gap-2">
+          <Link className="btn bg-green rounded-full px-6 text-white flex items-center gap-2">
             <LuPhoneCall /> Contact
-          </a>
+          </Link>
         </div>
       </div>
     </header>
