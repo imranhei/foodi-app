@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import Card from "../../components/Card";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-const simpleNextArrow = (props) => {
+const SimpleNextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div
@@ -18,7 +18,7 @@ const simpleNextArrow = (props) => {
   );
 };
 
-const simplePrevArrow = (props) => {
+const SimplePrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div
@@ -78,8 +78,8 @@ export default function SpacialDishes() {
         },
       },
     ],
-    nextArrow: <simpleNextArrow />,
-    prevArrow: <simplePrevArrow />,
+    nextArrow: <SimpleNextArrow />,
+    prevArrow: <SimplePrevArrow />,
   };
 
   return (
@@ -96,7 +96,7 @@ export default function SpacialDishes() {
 
       <Slider ref={slider} {...settings} className="overflow-hidden mt-10 space-x-5">
         {recipes?.map((recipe, i) => (
-          <Card key={i} recipe={recipe} />
+          <Card key={i} item={recipe} />
         ))}
       </Slider>
     </div>

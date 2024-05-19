@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import logo from "/logo.png";
-import { LuPhoneCall } from "react-icons/lu";
+import { FaRegUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Modal from "./Modal";
+import { AuthContext } from "../contexts/AuthProvider";
+import Profile from "./Profile";
 
 export default function Navbar() {
   const [isSticky, setSticky] = useState(false);
+
+  const { user } = useContext(AuthContext);
+  console.log(user);
+
   const navItems = (
     <>
       <li>
@@ -66,7 +73,13 @@ export default function Navbar() {
 
   return (
     <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out">
-      <div className={`navbar xl:px-24 ${isSticky ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out" : ""}`}>
+      <div
+        className={`navbar xl:px-24 ${
+          isSticky
+            ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
+            : ""
+        }`}
+      >
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -100,8 +113,7 @@ export default function Navbar() {
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
         <div className="navbar-end">
-
-            {/* Search Button */}
+          {/* Search Button */}
           <button className="btn btn-ghost btn-circle hidden lg:flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -144,10 +156,18 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Contact button */}
-          <Link className="btn bg-green rounded-full px-6 text-white flex items-center gap-2">
-            <LuPhoneCall /> Contact
-          </Link>
+          {/* Login button */}
+          {user ? (
+            <Profile user={user} />
+          ) : (
+            <button
+              className="btn bg-green rounded-full px-6 text-white flex items-center gap-2"
+              onClick={() => document.getElementById("my_modal_5").showModal()}
+            >
+              <FaRegUser /> Login
+            </button>
+          )}
+          <Modal />
         </div>
       </div>
     </header>
