@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../contexts/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Profile = ({ user }) => {
+  const { logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
   return (
     <div className="drawer drawer-end z-50 w-fit">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -31,16 +45,16 @@ const Profile = ({ user }) => {
         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
           <li>
-            <a>Profile</a>
+            <Link to="/update-profile">Profile</Link>
           </li>
           <li>
-            <a>Order</a>
+            <Link>Order</Link>
           </li>
           <li>
-            <a>Settings</a>
+            <Link>Settings</Link>
           </li>
           <li>
-            <a>Logout</a>
+            <a onClick={handleLogout}>Logout</a>
           </li>
         </ul>
       </div>

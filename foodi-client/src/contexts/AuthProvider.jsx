@@ -1,5 +1,14 @@
 import React, { useState, createContext, useEffect } from "react";
-import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile
+} from "firebase/auth";
 import app from "../firebase/firebase.config";
 
 export const AuthContext = createContext();
@@ -12,11 +21,13 @@ const AuthProvider = ({ children }) => {
 
   //create an account
   const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // signup with gmail account
   const signUpWithGoogle = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
@@ -27,33 +38,38 @@ const AuthProvider = ({ children }) => {
 
   // Logout
   const logout = () => {
-    signOut(auth);
-  }
+    return signOut(auth);
+  };
 
   // check signed-in user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if(currentUser) {
-        setUser(currentUser);
-        setLoading(false);
-      } else {
-
-      }
+      setUser(currentUser);
+      setLoading(false);
     });
+
     return () => {
       return unsubscribe();
-    }
+    };
   }, []);
 
   // update profile
-  const updateProfile = (name, [photoURL]) => {
+  const updateUserProfile = (name, photoURL) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoURL,
     });
-  }
+  };
 
-  const authInfo = { user, createUser, signUpWithGoogle, login, logout, updateProfile, loading };
+  const authInfo = {
+    user,
+    createUser,
+    signUpWithGoogle,
+    login,
+    logout,
+    updateUserProfile,
+    loading,
+  };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
