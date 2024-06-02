@@ -104,4 +104,3 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-//mongodb+srv://imranhei32:kztt0aeJ6qjJiscw@foodi.m8tn2j4.mongodb.net/?retryWrites=true&w=majority&appName=foodi
