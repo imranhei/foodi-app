@@ -1,5 +1,5 @@
 import React, { Children, useContext } from "react";
-import { Route, Redirect, useLocation, Navigate } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import Loading from "../components/Loading";
 
